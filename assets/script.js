@@ -1,4 +1,5 @@
-// Slider
+// Slider sous forme d'un tableau contenant les objets de chaque slide
+// Chaque objet contient une images, son alt et son texte associé
 const slider = [
   {
     image: "slide1.jpg",
@@ -23,37 +24,73 @@ const slider = [
   },
 ];
 
-// Flèches
+// Récupération des éléments HTML pour pouvoir les utiliser dans le script
+const bannerImage = document.querySelector(".banner-img");
+const bannerText = document.querySelector("#banner p");
 const leftArrow = document.querySelector(".arrow_left");
 const rightArrow = document.querySelector(".arrow_right");
-
-leftArrow.addEventListener("click", () => {
-  console.log("Clic flèche gauche");
-});
-
-rightArrow.addEventListener("click", () => {
-  console.log("Clic flèche droite");
-});
-
-// Dots
 const dotsContainer = document.querySelector(".dots");
+// Index de la première slide du tableau pour commencer au début du slider
 let currentIndex = 0;
 
+// Création des dots
 function createDots() {
+  // Chaque objet du tableau slider exécute le code ci-dessous
   slider.forEach((_, index) => {
+    // Création d'une div qui contient un dot
     const dot = document.createElement("div");
     dot.classList.add("dot");
+    // Si on est sur la première slide, on sélectionne le 1er dot
     if (index === 0) {
       dot.classList.add("dot_selected");
     }
+    // On l'ajoute dans le container prévu dans le HTML
     dotsContainer.appendChild(dot);
   });
 }
 
+// Mise à jour du slider
+function updateSlider() {
+  // Image changée en fonction de là où on se situe dans le tableau slider
+  bannerImage.src = `./assets/images/slideshow/${slider[currentIndex].image}`;
+  bannerImage.alt = slider[currentIndex].alt;
+  // Idem pour le texte (innerHTML car Tagline contient des <span>)
+  bannerText.innerHTML = slider[currentIndex].tagLine;
+  // MaJ des dots
+  updateDots();
+}
+
+// Fonction qui gère la m ise à jour des dots
 function updateDots() {
+  // On sélectionne tous les dots et on en parcourt la liste
   document.querySelectorAll(".dot").forEach((dot, index) => {
+    // On applique la classe CSS adéquate au dot en cours d'utilisation
+    // et on l'enlève aux autres grâce à toggle
     dot.classList.toggle("dot_selected", index === currentIndex);
   });
 }
 
+// Clic sur la flèche gauche
+// On écoute d'abord l'évènement
+leftArrow.addEventListener("click", () => {
+  // S'il a lieu, on va à la slide précédente
+  // Si on est sur la 1ère slide, on va à la dernière
+  // grâce au % slider.length qui créé une boucle infinie
+  currentIndex = (currentIndex - 1 + slider.length) % slider.length;
+  // On appelle la fonction qui met à jour le slider
+  updateSlider();
+});
+
+// Clic sur la flèche droite
+// On écoute d'abord l'évènement
+rightArrow.addEventListener("click", () => {
+    // S'il a lieu, on va à la slide suivante
+      // Si on est sur la dernière slide, on va à la 1ère
+        // grâce au % slider.length qui créé une boucle infinie
+  currentIndex = (currentIndex + 1) % slider.length;
+  updateSlider();
+});
+
+// Initialisation, permet que le slider et les dots apparaissent au chargement de la page
 createDots();
+updateSlider();
