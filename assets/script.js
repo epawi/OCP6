@@ -84,9 +84,9 @@ leftArrow.addEventListener("click", () => {
 // Clic sur la flèche droite
 // On écoute d'abord l'évènement
 rightArrow.addEventListener("click", () => {
-    // S'il a lieu, on va à la slide suivante
-      // Si on est sur la dernière slide, on va à la 1ère
-        // grâce au % slider.length qui créé une boucle infinie
+  // S'il a lieu, on va à la slide suivante
+  // Si on est sur la dernière slide, on va à la 1ère
+  // grâce au % slider.length qui créé une boucle infinie
   currentIndex = (currentIndex + 1) % slider.length;
   updateSlider();
 });
