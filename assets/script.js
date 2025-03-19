@@ -44,6 +44,13 @@ function createDots() {
     if (index === 0) {
       dot.classList.add("dot_selected");
     }
+    // Evènement au clic sur les dots pour pouvoir naviguer dans le slider
+    dot.addEventListener("click", () => {
+      // Met à jour l'index avec celui du dot cliqué
+      currentIndex = index;
+      // Met à jour l'affichage du slider
+      updateSlider();
+    });
     // On l'ajoute dans le container prévu dans le HTML
     dotsContainer.appendChild(dot);
   });
