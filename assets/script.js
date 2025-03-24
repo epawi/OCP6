@@ -21,7 +21,7 @@ const slider = [
     image: "slide4.png",
     alt: "10 autocollants autour d'un thème astral sur fond jaune",
     tagLine: "Autocollants <span>avec découpe laser sur mesure</span>",
-  },
+  }
 ];
 
 // Récupération des éléments HTML pour pouvoir les utiliser dans le script
