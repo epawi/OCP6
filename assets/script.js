@@ -61,7 +61,9 @@ function updateSlider() {
   // Image changée en fonction de là où on se situe dans le tableau slider
   bannerImage.src = `./assets/images/slideshow/${slider[currentIndex].image}`;
   bannerImage.alt = slider[currentIndex].alt;
-  // Idem pour le texte (innerHTML car on utilise la valeur entre les balises <p>)
+  // Idem pour le texte (innerHTML car la propriété permet à une chaîne de caractères JavaScript 
+  //d'être interprété par le navigateur comme du code HTML et que nous avons ici la présence
+  // des balises <p>)
   bannerText.innerHTML = slider[currentIndex].tagLine;
   // MaJ des dots
   updateDots();
